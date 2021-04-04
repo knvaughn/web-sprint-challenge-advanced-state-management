@@ -3,7 +3,7 @@ import {
     SMURF_FETCH_SUCCESS,
     SMURF_FETCH_FAILURE,
     ADD_SMURF,
-    UPDATE_ERROR
+    SET_ERROR
 } from '../actions';
 
 export const initialState = {
@@ -39,7 +39,7 @@ const reducer = (state = initialState, action)=>{
                     action.payload
                 ]
             }
-        case UPDATE_ERROR:
+        case SET_ERROR:
             return {
                 ...state,
                 error: action.payload
