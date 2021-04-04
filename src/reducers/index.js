@@ -1,8 +1,52 @@
+import {
+    START_SMURF_FETCH,
+    SMURF_FETCH_SUCCESS,
+    SMURF_FETCH_FAILURE,
+    ADD_SMURF,
+    SET_ERROR
+} from '../actions';
 
 export const initialState = {
+    smurfs: [],
+    isLoading: false,
+    error: ''
 }
 
-const reducer = ()=>{
+const reducer = (state = initialState, action)=>{
+    switch (action.type) {
+        case START_SMURF_FETCH:
+            return {
+                ...state,
+                isLoading: true
+            }
+        case SMURF_FETCH_SUCCESS:
+            return {
+                ...state,
+                smurfs: action.payload,
+                isLoading: false
+            }
+        case SMURF_FETCH_FAILURE:
+            return {
+                ...state,
+                error: action.payload,
+                isLoading: false
+            }
+        case ADD_SMURF:
+            return {
+                ...state,
+                smurfs: [
+                    ...state.smurfs,
+                    action.payload
+                ]
+            }
+        case SET_ERROR:
+            return {
+                ...state,
+                error: action.payload
+            }
+        default:
+            return state;
+    }
 }
 
 export default reducer;
@@ -10,7 +54,7 @@ export default reducer;
 //Task List:
 //1. Adds the following state values into the initialState:
 //  - an array of smurfs
-//  - a boolean indicating if the app is loading
+//  - a boolean indicating if the app is isLoading
 //  - a string indicating a possible error message
 
 //2. Add in the arguments needed to complete a standard reducer function.
